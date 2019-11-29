@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{content}}</p>
+    <p>{{content.toUpperCase()}}</p>
+
+    <a href="url">学习</a>
+    <a v-bind:href="url">学习</a>
+    <a :href="url">学习</a>
+
+    <button v-on:click='test'>test1</button>
+    <button @click='test'>test2</button>
+  </div>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+  new Vue({
+     el:"#app",
+     data:{
+       content:'I Will Back!',
+       url:'http://www.atguigu.com'
+     },
+     methods:{
+      test(event){
+        alert(event.target.innerHTML +'----'+ this.content)
+      }
+     }
+  })
+  </script>
+</body>
+</html>

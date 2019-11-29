@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="example">
+    <button @click='test1'>test1</button>
+    <button @click='test2("abc")'>test2</button>
+    <button @click='test3("atguigu",$event)'>test3</button>
+
+    <a href="http://atguigu.com" @click.prevent='test4'>尚硅谷</a>
+    <div style='width:200px;height:200px;background-color: #bfa;' @click='test5'>
+      <div style='width:100px;height:100px;background-color: #bbbbbb;' @click.stop='test6'></div>
+    </div>
+    
+    <input type="text" v-model='msg'@keyup.13="test7">
+    <input type="text" v-model='mesg'@keyup.space="test8">
+  </div>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+  new Vue({
+     el:"#example",
+     data:{
+       msg:'abc',
+       mesg:'123'
+     },
+     methods:{
+      test1(e){
+         alert(e.target.innerHTML)
+       },
+       test2(msg){
+         alert(msg)
+       },
+       test3(a,b){
+         alert(a + '----' + b.target.innerHTML)
+       },
+       test4(e){
+         alert(e.target.innerHTML)
+       },
+       test5(){
+         alert('out')
+       },
+       test6(){
+         alert('inner')
+       },
+       test7(event){
+         alert(this.msg)
+       },
+       test8(event){
+         alert(this.mesg)
+       }
+     }
+  })
+  </script>
+</body>
+</html>

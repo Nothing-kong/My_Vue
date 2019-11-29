@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .classA{
+      color:red
+    }
+    .classB{
+      background-color: royalblue;
+    }
+    .classC{
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo">
+    <p class='classC' :class='myClass'>xxxxxx</p>
+    <p :class='{classB:hasB,classC:hasC}'>yyyyyy</p>
+
+    <p :style='{color:activeColor,fontSize:fontSize+"px"}'>zzzzzz</p>
+
+    <button @click='update'>更新</button>
+  </div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+new Vue({
+   el:'#demo',
+   data:{
+    myClass:'classA',
+    hasB:false,
+    hasC:true,
+    activeColor:'#bfa',
+    fontSize:50
+
+
+   },
+   methods:{
+    update(){
+    this.myClass = 'classB',
+    this.hasB=!this.hasB,
+    this.hasC =!this.hasC
+    this.activeColor = 'pink'
+    this.fontSize = 20
+    }
+   }
+})
+</script>
+</html>
