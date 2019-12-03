@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="test">
+    <input type="text"  v-model="searchName">
+    <ul>
+      <li v-for="(person, index) in persons1" :key="person.id">
+        {{person.id}}--{{person.name}}--{{person.age}}
+      </li>
+    </ul>
+    <button @click = 'sortType=3'>升序排列</button>
+    <button @click = 'sortType=2'>降序排列</button>
+    <button @click = 'sortType=1'>原来顺序</button>
+  </div>
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+new Vue({
+   data:{
+    searchName:'',
+    sortType:1,//1:原来   2：降序    3：升序
+     persons:[
+       {id:1,name:'hdcbkjbch',age:34},
+       {id:3,name:'dhfkjwljn',age:56},
+       {id:5,name:'aljovhjnv',age:46},
+       {id:6,name:'wuiegfgoj',age:36},
+       {id:8,name:'qiuwfiuhk',age:12},
+       {id:9,name:'wiuefooic',age:23},
+     ]
+   },
+   computed: {
+     persons1(){
+      const {searchName, persons, sortType} = this 
+      const arr = persons.filter(p => p.name.indexOf(searchName) >= 0)
+
+      if (sortType !==1) {
+        if (sortType ===2) {
+          arr.sort((p1,p2) => {//降
+            return p2.age - p1.age
+          })
+        } else {
+          arr.sort((p1,p2) => {//升
+            return p1.age - p2.age
+          })
+        }
+      }
+      return arr
+     }
+   },
+}).$mount('#test')
+</script>
+</html>
