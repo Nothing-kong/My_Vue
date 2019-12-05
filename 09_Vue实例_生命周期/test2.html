@@ -19,67 +19,62 @@
     * beforeDestory()
     * destoryed()
 2. 常用的生命周期方法
-  mounted(): 发送ajax请求, 启动定时器等异步任务
+  created()/mounted(): 发送ajax请求, 启动定时器等异步任务
   beforeDestory(): 做收尾工作, 如: 清除定时器
 -->
 
 <div id="test">
   <button @click="destroyVM">destroy vue</button>
-  <h2 ref="h2" v-show="isShow">
-    {{isShow ? 'Hello World' : 'xxxx'}}
-  </h2>
+  <p v-show="isShow" ref="content">{{isShow ? 'show...' : 'hide...' }}</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
   new Vue({
-    // el: '#test',
-    data: {
-      isShow: true  
+    el: '#test',
+    data() {
+      return {
+        isShow: true
+      }
     },
-
 
     beforeCreate() {
-      console.log('beforeCreate()', this.isShow) // undefined
+      console.log('beforeCreate()', this.isShow)
     },
-
+    // 实现数据代理: 后面可以通过vm读取data中的数据
     created() {
-      console.log('created()', this.isShow) // true
+      console.log('created()', this.isShow)
     },
 
+<<<<<<< HEAD
 
     
 
 
+=======
+>>>>>>> 535b5ad223eed6aebac32ae48377198adfc065c5
     beforeMount() {
       console.log('beforeMount()')
     },
 
-
-    /* 
-    页面初始显示之后执行1次
-    启动异步任务: 发ajax请求/启动定时器/订阅消息/绑定自定义事件监听
-     */
+    // 在第一次显示之后执行1次
     mounted() {
       console.log('mounted()')
-      this.intervalId = setInterval(() =>  {
-        console.log('-------')
+      this.intervalId = setInterval(() => {
+        console.log('-----')
         this.isShow = !this.isShow
-      }, 3000)
+      }, 1000)
     },
 
-    beforeUpdate() {
-      console.log('beforeUpdate()', this.isShow, this.$refs.h2.innerHTML )
+    beforeUpdate() { // 读的是老的界面
+      console.log('beforeUpdate()', this.isShow, this.$refs.content.innerHTML)
     },
 
-    updated() {
-      console.log('updated()', this.isShow, this.$refs.h2.innerHTML)
+    updated() { // 读的是新的界面
+      console.log('updated()', this.isShow, this.$refs.content.innerHTML)
     },
 
-    /* 
-    在vm死亡之前执行一次
-    做一些收尾的工作: 清除定时器/取消订阅
-    */
+    // 销毁之前执行1次
     beforeDestroy() {
       console.log('beforeDestroy()')
       clearInterval(this.intervalId)
@@ -94,7 +89,7 @@
         this.$destroy()
       }
     },
-  }).$mount('#test')
+  })
 
   
 </script>
